@@ -6,8 +6,9 @@ export interface Project {
     vi: string;
   };
   tech: string[];
-  platform: 'Android' | 'iOS' | 'Both';
+  platform: string;
   image: string;
+  images?: string[];
   links?: {
     appStore?: string;
     playStore?: string;
@@ -18,76 +19,87 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'dalathasfarm',
-    title: 'Dalat Hasfarm B2B',
+    id: 'dan-gian-cung-giai-dieu',
+    title: 'Dân Gian Cùng Giai Điệu',
     description: {
-      en: 'A comprehensive B2B ordering system with advanced features: Order Management, Allocation system (Allocate Seller & Manager) developed with ReactJS, Livestream integration with OBS, Real-time Comments, and Push Notifications. Implemented Native handling for OTA (Over-The-Air) updates.',
-      vi: 'Hệ thống đặt hàng B2B toàn diện với các tính năng nâng cao: Quản lý đơn hàng, Hệ thống phân bổ (Allocate Seller & Manager) phát triển bằng ReactJS, tích hợp Livestream với OBS, Bình luận thời gian thực và Thông báo đẩy. Triển khai xử lý Native cho các bản cập nhật OTA (Over-The-Air).',
+      en: 'A catalogue design project introducing Vietnamese folk musical instruments through traditional-inspired imagery, warm colors, and balanced editorial layouts. The project combines cultural research with modern graphic design to create a polished visual publication.',
+      vi: 'Dự án thiết kế catalogue giới thiệu các loại nhạc cụ dân gian Việt Nam thông qua hình ảnh, màu sắc và bố cục mang hơi hướng truyền thống. Trong quá trình thực hiện, tôi tập trung khai thác chất liệu văn hóa dân tộc, kết hợp cùng phong cách thiết kế hiện đại để tạo nên một ấn phẩm gần gũi, có tính thẩm mỹ và truyền tải được tinh thần âm nhạc dân gian Việt Nam.',
     },
-    tech: ['React Native', 'ReactJS', 'Firebase', 'TypeScript', 'Redux', 'React query', 'OBS Integration', 'Native Modules'],
-    platform: 'Both',
-    image: '/assets/dalathasfarm.png',
-    links: {
-      appStore: 'https://apps.apple.com/vn/app/dalat-hasfarm-b2b/id6446385785',
-      playStore: 'https://play.google.com/store/apps/details?id=com.hasfarm.customer',
-    }
+    tech: ['Catalogue Design', 'Brand Identity', 'Layout', 'Typography', 'Adobe Photoshop', 'Adobe Illustrator'],
+    platform: 'Graphic Design',
+    image: '/assets/dan-gian-cung-giai-dieu-0001.jpg',
+    images: [
+      '/assets/dan-gian-cung-giai-dieu-0001.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0002.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0003.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0004.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0005.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0006.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0007.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0008.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0009.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0010.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0011.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0012.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0013.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0014.jpg',
+      '/assets/dan-gian-cung-giai-dieu-0015.jpg',
+    ],
   },
   {
-    id: 'delivery',
-    title: 'Internal Delivery',
+    id: 'hoi-uc-dau-thuong',
+    title: 'Hồi Ức Đau Thương',
     description: {
-      en: 'Internal delivery management system using VueJs for managing trip creation forms and developing a dedicated driver application for internal logistics.',
-      vi: 'Hệ thống quản lý giao nhận nội bộ sử dụng VueJs để quản lý phiếu tạo chuyến giao và phát triển ứng dụng tài xế cho hoạt động giao hàng nội bộ.',
+      en: 'A book cover design concept using layered illustration, muted green tones, and strong red accents to express nostalgia, sadness, and emotional memory.',
+      vi: 'Dự án thiết kế bìa sách với hình ảnh minh họa giàu cảm xúc, sử dụng tông xanh trầm kết hợp sắc đỏ nổi bật để gợi cảm giác hoài niệm, nỗi đau và chiều sâu ký ức.',
     },
-    tech: ['VueJS', 'Google Maps API', 'Node.js', 'Internal Logistics'],
-    platform: 'Both',
-    image: '/assets/internaldelivery.jpeg',
+    tech: ['Book Cover', 'Illustration', 'Typography', 'Layout', 'Adobe Photoshop', 'Adobe Illustrator'],
+    platform: 'Cover Design',
+    image: '/assets/hoi-uc-dau-thuong-book-cover.jpeg',
+    images: ['/assets/hoi-uc-dau-thuong-book-cover.jpeg'],
   },
   {
-    id: 'meji',
-    title: 'Meiji (Mẹ Easy)',
+    id: 'trung-thu-packaging',
+    title: 'Thiết Kế Bao Bì Bánh Trung Thu',
     description: {
-      en: 'Health advice platform for pregnancy and post-pregnancy care, featuring personalized notification schedules and health statistics.',
-      vi: 'Nền tảng tư vấn sức khỏe cho thời kỳ mang thai và sau sinh, có tính năng lịch thông báo cá nhân hóa và thống kê sức khỏe.',
+      en: 'A Mid-Autumn mooncake packaging design project for the THƯƠNG brand, including concept research, dieline layouts, box structures, decorative illustration, and product mockups.',
+      vi: 'Dự án thiết kế bao bì bánh Trung Thu cho thương hiệu THƯƠNG, bao gồm nghiên cứu ý tưởng, triển khai khuôn bế, bố cục hộp, minh họa trang trí và mockup sản phẩm.',
     },
-    tech: ['React Native', 'Firebase', 'Javascript'],
-    platform: 'Both',
-    image: '/assets/meji.png',
-    links: {
-      playStore: 'https://play.google.com/store/apps/details?id=vn.kbm.meiji&hl=vi',
-    }
+    tech: ['Packaging Design', 'Dieline', 'Mockup', 'Illustration', 'Adobe Illustrator', 'Adobe Photoshop'],
+    platform: 'Packaging',
+    image: '/assets/thiet-ke-bao-bi-banh-trung-thu.jpeg',
+    images: ['/assets/thiet-ke-bao-bi-banh-trung-thu.jpeg'],
   },
   {
-    id: 'novelapp',
-    title: 'Mê Truyện Sáng Tác',
+    id: 'brochure',
+    title: 'Brochure',
     description: {
-      en: 'A platform for creative story writers and readers built with PHP and SQL backend with a React Native mobile application.',
-      vi: 'Nền tảng dành cho những người sáng tác và đọc truyện, được xây dựng với Backend PHP/SQL và ứng dụng di động React Native.',
+      en: 'A brochure design project for a Mid-Autumn theme, using festive illustrations, product information sections, and a decorative layout to present the concept clearly.',
+      vi: 'Dự án thiết kế brochure chủ đề Trung Thu, sử dụng minh họa lễ hội, các phần thông tin sản phẩm và bố cục trang trí để trình bày ý tưởng một cách rõ ràng, sinh động.',
     },
-    tech: ['React Native', 'PHP', 'SQL', 'MySQL', 'Fullstack'],
-    platform: 'Both',
-    image: '/assets/mtst.png',
-    links: {
-      website: 'https://metruyensangtac.com/',
-    }
+    tech: ['Brochure Design', 'Editorial Layout', 'Illustration', 'Typography', 'Adobe Illustrator'],
+    platform: 'Brochure',
+    image: '/assets/trung-thu-packaging.jpg',
+    images: ['/assets/trung-thu-packaging.jpg'],
   },
   {
-    id: 'superdelivery',
-    title: 'Super Delivery System',
+    id: 'dien-sac-dien-hon',
+    title: 'Diện Sắc - Diện Hồn',
     description: {
-      en: 'Complete ecosystem with Driver, Merchant, and Customer apps for Food, Courier, and Ride-hailing services. Features a robust ReactJS Admin dashboard.',
-      vi: 'Hệ sinh thái hoàn chỉnh với các ứng dụng Tài xế, Đối tác và Khách hàng cho các dịch vụ Đồ ăn, Giao nhận và Gọi xe. Bao gồm bảng điều khiển Admin ReactJS mạnh mẽ.',
+      en: 'A poster mockup for a Vietnamese opera-inspired visual campaign, combining theatrical masks, floral details, contrast colors, and outdoor advertising presentation.',
+      vi: 'Dự án thiết kế poster/mockup lấy cảm hứng từ nghệ thuật hát bội Việt Nam, kết hợp hình ảnh mặt nạ sân khấu, họa tiết hoa, màu sắc tương phản và cách trình bày trên bảng quảng cáo ngoài trời.',
     },
-    tech: ['React Native', 'ReactJS', 'Node.js', 'PostgreSQL', 'Google Maps', 'Socket.io', 'Fullstack'],
-    platform: 'Both',
-    image: '/assets/processing.png',
+    tech: ['Poster Design', 'Mockup', 'Vietnamese Culture', 'Visual Campaign', 'Adobe Photoshop'],
+    platform: 'Poster',
+    image: '/assets/dien-sac-dien-hon-poster-mockup.jpg',
+    images: ['/assets/dien-sac-dien-hon-poster-mockup.jpg'],
   },
 ];
 
 export const SKILLS = {
-  languages: ['Typescript', 'Javascript', 'Dart', 'Java', 'SQL'],
-  platforms: ['React Native', 'Flutter', 'ReactJS', 'NextJs', 'NodeJs'],
-  tools: ['Redux', 'React Query', 'Firebase', 'Google Maps', 'PostgreSQL', 'Appcenter', 'REST APIs'],
+  languages: ['Bố cục', 'Màu sắc', 'Typography', 'Tư duy thẩm mỹ'],
+  platforms: ['Thiết kế đồ họa', 'Nhận diện thương hiệu', 'Thiết kế ấn phẩm', 'Biên tập hình ảnh'],
+  tools: ['Adobe Photoshop', 'Adobe Illustrator', 'After Effects', 'Làm việc nhóm', 'Sáng tạo', 'Tiếp thu góp ý'],
 };
 
 export const TRANSLATIONS = {
@@ -99,21 +111,21 @@ export const TRANSLATIONS = {
       contact: 'Contact',
     },
     hero: {
-      status: 'Based in Ho Chi Minh City',
-      title: 'Vũ Thành Nam',
-      role: 'Mobile Developer',
-      exp: '5 years experience',
-      desc: 'Specializing in React Native, Flutter, and Backend development. I build high-performance mobile solutions with a sharp eye for UX/UI design.',
+      status: 'Graphic Design Student',
+      title: 'Đỗ Thị Sáu',
+      role: 'Graphic Designer',
+      exp: '2nd-year student',
+      desc: 'I am studying Graphic Design at Thu Duc College of Technology, with a foundation in layout, color, visual composition, and creative design tools.',
       viewProjects: 'View Projects',
       contactMe: 'Contact Me',
     },
     about: {
       tag: 'About Me',
-      title: 'Crafting seamless mobile experiences.',
-      desc1: 'I am a dedicated Mobile Developer with 5 years of expertise in React Native, complemented by experience in Flutter and Full-stack development. My goal is to provide elegant solutions to complex application problems.',
-      desc2: 'With a strong foundation in UX/UI design, I ensure that every product I build not only functions perfectly but also provides an exceptional user experience.',
-      desc3: 'I have a proven track record of deploying applications to both CH Play and AppStore, managing everything from initial design to OTA code push deployments.',
-      yearsTag: 'Years React Native',
+      title: 'Designing visual stories with care and creativity.',
+      desc1: 'I am Đỗ Thị Sáu, a second-year Graphic Design student at Thu Duc College of Technology. Through my studies, I have built a foundation in design principles, layout, color, and visual communication.',
+      desc2: 'I can work with tools such as Adobe Photoshop, Illustrator, and After Effects. I learn quickly, stay creative, and actively receive feedback to improve my skills.',
+      desc3: 'Although my practical business experience is still limited, I proactively learn new knowledge, work on personal projects, and am ready to adapt to a professional working environment.',
+      yearsTag: 'Year Student',
     },
     expertise: {
       tag: 'Expertise',
@@ -125,11 +137,11 @@ export const TRANSLATIONS = {
     portfolio: {
       tag: 'Portfolio',
       title: 'Selected Works',
-      desc: 'A selection of projects where I\'ve applied my expertise in mobile development.',
+      desc: 'A selection of design projects where I apply layout, color, and visual storytelling.',
     },
     contact: {
-      title: "Let's build something extraordinary.",
-      desc: 'Ready to bring your mobile app ideas to life? Get in touch and let\'s start a conversation.',
+      title: "Let's create meaningful visuals.",
+      desc: 'I am ready to learn, collaborate, and contribute to professional design projects.',
     },
     footer: {
       rights: 'All rights reserved.',
@@ -145,21 +157,21 @@ export const TRANSLATIONS = {
       contact: 'Liên hệ',
     },
     hero: {
-      status: 'Đống trú tại TP. Hồ Chí Minh',
-      title: 'Vũ Thành Nam',
-      role: 'Lập trình viên Mobile',
-      exp: '5 năm kinh nghiệm',
-      desc: 'Chuyên sâu về React Native, Flutter và phát triển Backend. Tôi xây dựng các giải pháp di động hiệu suất cao với con mắt tinh tường về thiết kế UX/UI.',
+      status: 'Sinh viên Thiết kế Đồ họa',
+      title: 'Đỗ Thị Sáu',
+      role: 'Thiết kế Đồ họa',
+      exp: 'Sinh viên năm 2',
+      desc: 'Tôi đang theo học ngành Thiết kế Đồ họa tại Trường Cao đẳng Công nghệ Thủ Đức, với nền tảng về thiết kế, bố cục, màu sắc và tư duy thẩm mỹ.',
       viewProjects: 'Xem dự án',
       contactMe: 'Liên hệ với tôi',
     },
     about: {
       tag: 'Về tôi',
-      title: 'Tạo ra những trải nghiệm di động liền mạch.',
-      desc1: 'Tôi là Lập trình viên Mobile tận tâm với 5 năm chuyên môn về React Native, bổ sung bởi kinh nghiệm trong Flutter và phát triển Full-stack. Mục tiêu của tôi là cung cấp các giải pháp thanh lịch cho các vấn đề ứng dụng phức tạp.',
-      desc2: 'Với nền tảng vững chắc về thiết kế UX/UI, tôi đảm bảo rằng mọi sản phẩm tôi xây dựng không chỉ hoạt động hoàn hảo mà còn cung cấp trải nghiệm người dùng đặc biệt.',
-      desc3: 'Tôi có bề dày thành tích trong việc triển khai ứng dụng cho cả CH Play và AppStore, quản lý mọi thứ từ thiết kế ban đầu đến triển khai đẩy mã OTA.',
-      yearsTag: 'Năm làm React Native',
+      title: 'Sáng tạo câu chuyện thị giác bằng sự chỉn chu.',
+      desc1: 'Tôi là Đỗ Thị Sáu, hiện là sinh viên năm 2 ngành Thiết kế Đồ họa tại Trường Cao đẳng Công nghệ Thủ Đức. Trong quá trình học tập, tôi đã được trang bị kiến thức nền tảng về thiết kế, bố cục, màu sắc và tư duy thẩm mỹ trong sản phẩm truyền thông.',
+      desc2: 'Tôi có khả năng sử dụng các phần mềm thiết kế như Adobe Photoshop, Illustrator, After Effects và luôn chủ động học hỏi để nâng cao kỹ năng chuyên môn. Bên cạnh đó, tôi là người có tinh thần sáng tạo, tiếp thu góp ý tốt, có trách nhiệm trong công việc và có khả năng làm việc nhóm hiệu quả.',
+      desc3: 'Tuy kinh nghiệm làm việc thực tế tại doanh nghiệp của tôi còn hạn chế do vẫn đang trong quá trình học tập, tôi luôn chủ động tìm hiểu kiến thức mới, thực hiện các dự án cá nhân và sẵn sàng học hỏi để nhanh chóng thích nghi với môi trường làm việc chuyên nghiệp.',
+      yearsTag: 'Sinh viên năm',
     },
     expertise: {
       tag: 'Chuyên môn',
@@ -171,11 +183,11 @@ export const TRANSLATIONS = {
     portfolio: {
       tag: 'Hồ sơ năng lực',
       title: 'Dự án tiêu biểu',
-      desc: 'Một số dự án tiêu biểu mà tôi đã áp dụng chuyên môn của mình trong phát triển di động.',
+      desc: 'Một số dự án tôi đã áp dụng kiến thức về bố cục, màu sắc và thiết kế thị giác.',
     },
     contact: {
-      title: 'Hãy cùng xây dựng điều gì đó phi thường.',
-      desc: 'Sẵn sàng đưa ý tưởng ứng dụng di động của bạn vào cuộc sống? Hãy liên hệ và chúng ta cùng trò chuyện.',
+      title: 'Hãy cùng tạo nên những thiết kế ý nghĩa.',
+      desc: 'Tôi sẵn sàng học hỏi, hợp tác và đóng góp trong các dự án thiết kế chuyên nghiệp.',
     },
     footer: {
       rights: 'Bản quyền được bảo lưu.',

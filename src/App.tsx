@@ -9,7 +9,7 @@ import { motion, useScroll, useSpring } from 'motion/react';
 import { useState } from 'react';
 
 export default function App() {
-  const [lang, setLang] = useState<'en' | 'vi'>('en');
+  const [lang, setLang] = useState<'en' | 'vi'>('vi');
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,

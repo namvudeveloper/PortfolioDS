@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Github, Linkedin, Mail, Menu, X, Languages, ExternalLink } from 'lucide-react';
+import { Phone, Menu, X, Languages, ExternalLink, Instagram, Facebook } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { TRANSLATIONS } from '../constants';
 
@@ -36,7 +36,7 @@ export const Navbar = ({ lang, setLang }: { lang: Lang, setLang: (l: Lang) => vo
           animate={{ opacity: 1, x: 0 }}
           className="text-xl font-display italic tracking-tighter"
         >
-          Vũ Thành Nam<span className="text-accent">.</span>
+          Đỗ Thị Sáu<span className="text-accent">.</span>
         </motion.a>
 
         {/* Desktop Nav */}
@@ -67,11 +67,11 @@ export const Navbar = ({ lang, setLang }: { lang: Lang, setLang: (l: Lang) => vo
             animate={{ opacity: 1, scale: 1 }}
             className="flex items-center gap-4 ml-4 pl-8 border-l border-white/10"
           >
-            <a href="https://github.com/namsdai1" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">
-              <Github size={18} />
+            <a href="https://instagram.com/Cynhaccudanam_8754" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors" aria-label="Instagram">
+              <Instagram size={18} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">
-              <Linkedin size={18} />
+            <a href="https://facebook.com/nhaccudanam" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors" aria-label="Facebook">
+              <Facebook size={18} />
             </a>
           </motion.div>
         </div>
@@ -188,7 +188,7 @@ export const About = ({ lang }: { lang: Lang }) => {
         >
           <div className="inline-flex items-center justify-center mb-8">
             <div className="h-20 w-20 glass-card rounded-2xl flex flex-col items-center justify-center border border-accent/20">
-              <span className="text-3xl font-display font-bold text-accent">5</span>
+              <span className="text-3xl font-display font-bold text-accent">2</span>
               <span className="text-[8px] uppercase tracking-widest text-white/40">{t.yearsTag.split(' ')[0]}</span>
             </div>
           </div>
@@ -278,6 +278,26 @@ export const Skills = ({ lang, skills }: { lang: Lang, skills: { languages: stri
 
 export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) => {
   const t = TRANSLATIONS[lang].portfolio;
+  const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedImage ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedImage]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <section id="projects" className="section-container">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -300,7 +320,12 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
             transition={{ delay: i * 0.2 }}
             className="group"
           >
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-8">
+            <button
+              type="button"
+              onClick={() => setSelectedImage({ src: project.image, title: project.title })}
+              className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-8 block w-full cursor-zoom-in text-left focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
+              aria-label={`Xem ${project.title}`}
+            >
               <img
                 src={project.image}
                 alt={project.title}
@@ -310,12 +335,33 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
               <div className="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] uppercase tracking-widest font-bold">
                 {project.platform}
               </div>
-            </div>
+            </button>
             
             <h4 className="text-3xl font-display mb-4 group-hover:text-accent transition-colors">{project.title}</h4>
             <p className="text-white/50 text-base leading-relaxed mb-8">
               {project.description[lang]}
             </p>
+
+            {project.images && project.images.length > 1 && (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+                {project.images.map((image: string, index: number) => (
+                  <button
+                    type="button"
+                    key={image}
+                    onClick={() => setSelectedImage({ src: image, title: `${project.title} ${index + 1}` })}
+                    className="relative aspect-[16/10] rounded-lg overflow-hidden border border-white/10 bg-white/5 cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-accent"
+                    aria-label={`Xem ${project.title} ${index + 1}`}
+                  >
+                    <img
+                      src={image}
+                      alt={`${project.title} ${index + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      loading="lazy"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
 
             {project.links && (
               <div className="flex gap-4 mb-8">
@@ -331,7 +377,7 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
                 )}
                 {project.links.github && (
                   <a href={project.links.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs text-accent hover:underline">
-                    <Github size={12} /> GitHub
+                    <ExternalLink size={12} /> GitHub
                   </a>
                 )}
                 {project.links.website && (
@@ -352,6 +398,43 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
           </motion.div>
         ))}
       </div>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[80] bg-black/90 backdrop-blur-sm p-4 md:p-8 flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedImage.title}
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            className="fixed top-4 right-4 md:top-6 md:right-6 z-[100] h-12 w-12 rounded-full border border-white/20 bg-black/80 shadow-2xl flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+            aria-label="Đóng"
+          >
+            <X size={22} />
+          </button>
+          <div
+            className="max-h-full max-w-6xl w-full flex flex-col items-center gap-4"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={selectedImage.src}
+              alt={selectedImage.title}
+              className="max-h-[82vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
+            />
+            <h5 className="text-white/80 text-sm md:text-base font-medium text-center">{selectedImage.title}</h5>
+          </div>
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            className="fixed bottom-4 left-1/2 z-[100] -translate-x-1/2 rounded-full border border-white/20 bg-white px-5 py-3 text-sm font-semibold text-black shadow-2xl hover:bg-accent hover:text-white transition-colors"
+          >
+            Đóng ảnh
+          </button>
+        </div>
+      )}
     </section>
   );
 };
@@ -375,19 +458,19 @@ export const Contact = ({ lang }: { lang: Lang }) => {
           
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <a
-              href="mailto:namvudeveloper@gmail.com"
+              href="tel:0344256802"
               className="flex items-center gap-3 text-2xl font-medium hover:text-accent transition-colors"
             >
-              <Mail className="text-accent" />
-              namvudeveloper@gmail.com
+              <Phone className="text-accent" />
+              0344256802
             </a>
             
             <div className="flex items-center gap-6">
-              <a href="https://github.com/namsdai1" target="_blank" rel="noreferrer" className="p-4 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all duration-300">
-                <Github size={24} />
+              <a href="https://instagram.com/Cynhaccudanam_8754" target="_blank" rel="noreferrer" className="p-4 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all duration-300" aria-label="Instagram">
+                <Instagram size={24} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-4 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all duration-300">
-                <Linkedin size={24} />
+              <a href="https://facebook.com/nhaccudanam" target="_blank" rel="noreferrer" className="p-4 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all duration-300" aria-label="Facebook">
+                <Facebook size={24} />
               </a>
             </div>
           </div>
@@ -403,7 +486,7 @@ export const Footer = ({ lang }: { lang: Lang }) => {
     <footer className="py-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-white/40 text-sm">
-          © {new Date().getFullYear()} Vũ Thành Nam. {t.rights}
+          © {new Date().getFullYear()} Đỗ Thị Sáu. {t.rights}
         </p>
         <div className="flex items-center gap-8 text-xs uppercase tracking-widest text-white/40">
           <a href="#" className="hover:text-white transition-colors">{t.backToTop}</a>
