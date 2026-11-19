@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Phone, Menu, X, Languages, ExternalLink, Instagram, Facebook } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { createElement, useState, useEffect } from 'react';
 import { TRANSLATIONS } from '../constants';
 
 type Lang = 'en' | 'vi';
@@ -148,7 +148,7 @@ export const Hero = ({ lang }: { lang: Lang }) => {
             className="flex flex-col gap-6"
           >
             <h2 className="text-2xl md:text-3xl text-white/80 font-light italic">
-              {t.role} <span className="text-white/40">—</span> {t.exp}
+              {t.role}{t.exp && <> <span className="text-white/40">—</span> {t.exp}</>}
             </h2>
             
             <p className="text-lg text-white/60 leading-relaxed max-w-xl">
@@ -279,18 +279,28 @@ export const Skills = ({ lang, skills }: { lang: Lang, skills: { languages: stri
 export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) => {
   const t = TRANSLATIONS[lang].portfolio;
   const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
+  const [selected3D, setSelected3D] = useState<{ model: string; video?: string; poster: string; title: string } | null>(null);
+  const [active3DTab, setActive3DTab] = useState<'model' | 'video'>('model');
+  const [viewerReady, setViewerReady] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = selectedImage ? 'hidden' : '';
+    document.body.style.overflow = selectedImage || selected3D ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [selectedImage]);
+  }, [selectedImage, selected3D]);
+
+  useEffect(() => {
+    if (selected3D && !viewerReady) {
+      import('@google/model-viewer').then(() => setViewerReady(true));
+    }
+  }, [selected3D, viewerReady]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setSelectedImage(null);
+        setSelected3D(null);
       }
     };
 
@@ -322,9 +332,16 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
           >
             <button
               type="button"
-              onClick={() => setSelectedImage({ src: project.image, title: project.title })}
+              onClick={() => {
+                if (project.model) {
+                  setActive3DTab('model');
+                  setSelected3D({ model: project.model, video: project.video, poster: project.image, title: project.title });
+                } else {
+                  setSelectedImage({ src: project.image, title: project.title });
+                }
+              }}
               className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-8 block w-full cursor-zoom-in text-left focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
-              aria-label={`Xem ${project.title}`}
+              aria-label={project.model ? `${t.view3D}: ${project.title}` : `Xem ${project.title}`}
             >
               <img
                 src={project.image}
@@ -341,6 +358,33 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
             <p className="text-white/50 text-base leading-relaxed mb-8">
               {project.description[lang]}
             </p>
+
+            {project.model && (
+              <div className="flex flex-wrap gap-3 mb-8">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActive3DTab('model');
+                    setSelected3D({ model: project.model, video: project.video, poster: project.image, title: project.title });
+                  }}
+                  className="px-5 py-3 rounded-full bg-accent text-white text-sm font-semibold hover:bg-accent/80 transition-colors"
+                >
+                  {t.view3D}
+                </button>
+                {project.video && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActive3DTab('video');
+                      setSelected3D({ model: project.model, video: project.video, poster: project.image, title: project.title });
+                    }}
+                    className="px-5 py-3 rounded-full border border-white/20 text-sm font-semibold hover:bg-white/10 transition-colors"
+                  >
+                    {t.viewAnimation}
+                  </button>
+                )}
+              </div>
+            )}
 
             {project.images && project.images.length > 1 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
@@ -398,6 +442,57 @@ export const Projects = ({ lang, projects }: { lang: Lang, projects: any[] }) =>
           </motion.div>
         ))}
       </div>
+
+      {selected3D && (
+        <div
+          className="fixed inset-0 z-[80] bg-black/90 backdrop-blur-sm p-4 md:p-8 flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selected3D.title}
+          onClick={() => setSelected3D(null)}
+        >
+          <div className="w-full max-w-6xl max-h-full flex flex-col gap-4" onClick={(event) => event.stopPropagation()}>
+            <div className="flex items-center justify-between gap-4">
+              <h5 className="text-lg md:text-2xl font-display">{selected3D.title}</h5>
+              <button
+                type="button"
+                onClick={() => setSelected3D(null)}
+                className="h-11 w-11 shrink-0 rounded-full border border-white/20 bg-black/80 flex items-center justify-center hover:bg-white hover:text-black transition-colors"
+                aria-label={t.close3D}
+              >
+                <X size={22} />
+              </button>
+            </div>
+            <div className="flex gap-2" role="tablist" aria-label={selected3D.title}>
+              <button type="button" role="tab" aria-selected={active3DTab === 'model'} onClick={() => setActive3DTab('model')} className={`px-4 py-2 rounded-full text-sm ${active3DTab === 'model' ? 'bg-accent text-white' : 'bg-white/10 text-white/70'}`}>
+                {t.view3D}
+              </button>
+              {selected3D.video && (
+                <button type="button" role="tab" aria-selected={active3DTab === 'video'} onClick={() => setActive3DTab('video')} className={`px-4 py-2 rounded-full text-sm ${active3DTab === 'video' ? 'bg-accent text-white' : 'bg-white/10 text-white/70'}`}>
+                  {t.viewAnimation}
+                </button>
+              )}
+            </div>
+            <div className="w-full aspect-video max-h-[72vh] rounded-2xl overflow-hidden bg-[#222] border border-white/10">
+              {active3DTab === 'model' ? (
+                viewerReady ? createElement('model-viewer', {
+                  src: selected3D.model,
+                  poster: selected3D.poster,
+                  alt: selected3D.title,
+                  'camera-controls': true,
+                  'environment-image': 'neutral',
+                  'shadow-intensity': '1',
+                  'touch-action': 'pan-y',
+                  style: { width: '100%', height: '100%' },
+                }) : <div className="h-full flex items-center justify-center text-white/60">{t.loading3D}</div>
+              ) : (
+                <video key={selected3D.video} src={selected3D.video} poster={selected3D.poster} controls playsInline preload="metadata" className="w-full h-full object-contain" />
+              )}
+            </div>
+            {active3DTab === 'model' && <p className="text-center text-sm text-white/50">{t.rotateHint}</p>}
+          </div>
+        </div>
+      )}
 
       {selectedImage && (
         <div

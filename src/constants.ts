@@ -9,6 +9,8 @@ export interface Project {
   platform: string;
   image: string;
   images?: string[];
+  model?: string;
+  video?: string;
   links?: {
     appStore?: string;
     playStore?: string;
@@ -18,6 +20,19 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    id: 'quang-cao-san-pham-3d',
+    title: 'Quảng cáo sản phẩm bằng 3D',
+    description: {
+      en: 'A 3D product presentation for a printed piece about 3D printing. I built the scene in Blender, set up materials, lighting and cameras, then animated the package opening to reveal the character. Explore the model or watch the eight-second render.',
+      vi: 'Tôi dựng một cảnh 3D để giới thiệu ấn phẩm về nhựa in 3D. Trong Blender, tôi sắp xếp chất liệu, ánh sáng và camera, rồi làm chuyển động mở hộp để nhân vật xuất hiện. Người xem có thể xoay mô hình hoặc xem video dài 8 giây.',
+    },
+    tech: ['Blender', '3D Modeling', 'Lighting', 'Camera', 'Animation'],
+    platform: '3D / Animation',
+    image: '/assets/quang-cao-san-pham-3d.jpg',
+    model: '/assets/quang-cao-san-pham-3d.glb',
+    video: '/assets/quang-cao-san-pham-3d.mp4',
+  },
   {
     id: 'dan-gian-cung-giai-dieu',
     title: 'Dân Gian Cùng Giai Điệu',
@@ -99,7 +114,7 @@ export const PROJECTS: Project[] = [
 export const SKILLS = {
   languages: ['Bố cục', 'Màu sắc', 'Typography', 'Tư duy thẩm mỹ'],
   platforms: ['Thiết kế đồ họa', 'Nhận diện thương hiệu', 'Thiết kế ấn phẩm', 'Biên tập hình ảnh'],
-  tools: ['Adobe Photoshop', 'Adobe Illustrator', 'After Effects', 'Làm việc nhóm', 'Sáng tạo', 'Tiếp thu góp ý'],
+  tools: ['Adobe Photoshop', 'Adobe Illustrator', 'After Effects', 'Blender', 'Làm việc nhóm', 'Sáng tạo', 'Tiếp thu góp ý'],
 };
 
 export const TRANSLATIONS = {
@@ -114,7 +129,7 @@ export const TRANSLATIONS = {
       status: 'Graphic Design Student',
       title: 'Đỗ Thị Sáu',
       role: 'Graphic Designer',
-      exp: '2nd-year student',
+      exp: '',
       desc: 'I am studying Graphic Design at Thu Duc College of Technology, with a foundation in layout, color, visual composition, and creative design tools.',
       viewProjects: 'View Projects',
       contactMe: 'Contact Me',
@@ -138,6 +153,11 @@ export const TRANSLATIONS = {
       tag: 'Portfolio',
       title: 'Selected Works',
       desc: 'A selection of design projects where I apply layout, color, and visual storytelling.',
+      view3D: 'Explore in 3D',
+      viewAnimation: 'Watch animation',
+      rotateHint: 'Drag to rotate · Scroll to zoom',
+      loading3D: 'Loading 3D model…',
+      close3D: 'Close viewer',
     },
     contact: {
       title: "Let's create meaningful visuals.",
@@ -159,8 +179,8 @@ export const TRANSLATIONS = {
     hero: {
       status: 'Sinh viên Thiết kế Đồ họa',
       title: 'Đỗ Thị Sáu',
-      role: 'Thiết kế Đồ họa',
-      exp: 'Sinh viên năm 2',
+      role: 'Graphic Designer',
+      exp: '',
       desc: 'Tôi đang theo học ngành Thiết kế Đồ họa tại Trường Cao đẳng Công nghệ Thủ Đức, với nền tảng về thiết kế, bố cục, màu sắc và tư duy thẩm mỹ.',
       viewProjects: 'Xem dự án',
       contactMe: 'Liên hệ với tôi',
@@ -184,6 +204,11 @@ export const TRANSLATIONS = {
       tag: 'Hồ sơ năng lực',
       title: 'Dự án tiêu biểu',
       desc: 'Một số dự án tôi đã áp dụng kiến thức về bố cục, màu sắc và thiết kế thị giác.',
+      view3D: 'Xem mô hình 3D',
+      viewAnimation: 'Xem chuyển động',
+      rotateHint: 'Kéo để xoay · Cuộn để phóng to',
+      loading3D: 'Đang tải mô hình 3D…',
+      close3D: 'Đóng mô hình',
     },
     contact: {
       title: 'Hãy cùng tạo nên những thiết kế ý nghĩa.',
